@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Welcome to Chirper</h1>
+<p>This application is a super-simple "Twitter*-Clone" built to demonstrate <a href="https://consideratecode.com/2017/08/31/csrf/">a CSRF attack</a>.</p>
+<p>To properly demonstrate CSRF, you need an authenticated user. Clicking the button below will create a new user with a random username and automatically log you in.</p>
+<p>You can then post status updates which will appear on your profile page.</p>
+<form action="" method="POST">
+  {% csrf_token %}
+  <input type="submit" value="Create new user &amp; login" />
+</form>
+<h3>Note</h3>
+<p>Once you log out, there is intentionally no way to log in again as the same user. All data will be deleted on a regular basis.</p>
+<p>Built by <a href="https://twitter.com/danielhepper">@danielhepper</a>.
+<p><small>This application is obviously neither affiliated with nor endorsed by Twitter.</small></p>
+{% endblock %}

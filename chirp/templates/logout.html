@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Do you really want to log out?</h1>
+<p>Once you are logged out, there is no way to log in again as the same user.</p>
+<form action="" method="POST">
+  {% csrf_token %}
+  <input type="submit" value="Logout"> <a href="{% url 'chirp:profile' request.user.username %}">Cancel</a>
+</form>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>User {{ user }}</h1>
+{% for status in user.status_set.all %}
+<div>
+  <p>{{ status.message }}</p>
+  <p><small>Posted: {{ status.created_at }}</small></p>
+  {% if not forloop.last %}<hr />{% endif %}
+</div>
+{% empty %}
+<p>No status posted yet. {% if request.user == user %}<a href="{% url 'chirp:create_status' %}">Go ahead and write something!{% endif %}</p>
+{% endfor %}
+{% endblock %}

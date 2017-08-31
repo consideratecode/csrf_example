@@ -1,0 +1,9 @@
+CSRF demo app
+=============
+
+This application is a super-simple "Twitter*-Clone" written in Django, built to demonstrate a CSRF attack.
+
+Author: Daniel Hepper <daniel@consideratecode.com>
+License: MIT
+
+This application is obviously neither affiliated with nor endorsed by Twitter.</small></p>

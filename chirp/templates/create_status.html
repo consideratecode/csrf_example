@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Create a new status update</h1>
+<p>The status update will be listed on <a href="{% url 'chirp:profile' request.user.username %}">your profile</a>.<p>
+<form action="" method="POST">
+{% csrf_token %}
+<div>{{ form.message.label_tag }}</div>
+<div>{{ form.message.errors }}
+<div>{{ form.message }}</div>
+<input type="submit" value="Create status update">
+</form>
+{% endblock %}
