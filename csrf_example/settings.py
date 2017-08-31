@@ -19,13 +19,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['SECRET_KEY']
+# SECURITY WARNING: in production, you must set the environment variable SECRET_KEY!
+SECRET_KEY = os.environ.get('SECRET_KEY', 'YijMN4ikCZ8P+i;MaoJvWZpickYv#}NLeFFdowadhGY9ptuipk3yynYaZFQYmxrf')
 
+# Set the environment variable DJANGO_DEBUG to run in debug mode.
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DJANGO_DEBUG'))
 
-ALLOWED_HOSTS = list(filter(None, os.environ.get('ALLOWED_HOSTS', '').split(',')))
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,[::1]').split(',')
 
 
 # Application definition
@@ -73,6 +74,7 @@ WSGI_APPLICATION = 'csrf_example.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
+# Use SQLite by default
 
 DATABASES = {
     'default': {
@@ -80,6 +82,13 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+# When deploying to Heroku, the database configuration is read from the
+# environment variable DATABASE_URL using the dj_database_url package.
+# See https://devcenter.heroku.com/articles/django-app-configuration#database-configuration
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 
 # Password validation
@@ -119,5 +128,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
 
 LOGIN_URL = 'chirp:create_user'
